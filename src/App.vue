@@ -6,7 +6,8 @@
 
 <script>
 // IMPORTS //
-import header from './components/header.vue'
+import header from '@/components/header.vue'
+import searchResults from '@/components/searchResults.vue'
 
 export default {
     data () {

@@ -2,7 +2,7 @@
     <header class="app-header">
         <img :src="logo" class="App-logo" alt="logo" />
         <form class="search-form">
-            <input type="text" name="userInput" />
+            <input type="text" name="userInput" v-model="searchTerm"/>
             <span class="search-bar"></span>
             <label for="userInput">Enter a movie title...</label>
             <button @click.prevent="getSearchResults" class="search-button"></button>
@@ -13,17 +13,26 @@
 
 <script>
     // IMPORTS //
-    import logo from '../assets/logo.svg'
+    import logo from '@/assets/logo.svg'
+    import { bus } from '@/main'
+    import axios from 'axios'
+    import router from '@/router'
 
     export default {
         data() {
             return {
                 logo,
+                searchTerm: ''
             }
         },
         methods: {
             async getSearchResults() {
-
+                const apiKey = process.env.VUE_APP_API_KEY
+                let results = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${this.searchTerm}`)
+                this.searchTerm = ''
+                console.log(results)
+                bus.$emit('gotSearchResults', results)
+                router.push("results")
             }
         }
     }
@@ -32,7 +41,7 @@
 <style scoped>
     .app-header {
         display: flex;
-        flex-direction: row;
+        flex-direction: row;    
         align-items: center;
         padding-top: 2%;
         padding-left: 5%;
