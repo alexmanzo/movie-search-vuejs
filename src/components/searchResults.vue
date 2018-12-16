@@ -23,7 +23,7 @@
 
 <script>
 // IMPORTS //
-import { bus } from '@/main'
+import axios from 'axios'
 import noPhoto from '@/assets/nophoto.svg'
 
 export default {
@@ -31,19 +31,22 @@ export default {
         return {
             movies: [],
             numOfResults: null,
-            noPhoto: noPhoto,
+            noPhoto,
         }
     },
     methods: {
-
+        async getSearchResults(query) {
+                const apiKey = process.env.VUE_APP_API_KEY
+                let movies = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${query}`)
+                this.movies = movies.data.results
+                this.numOfResults = movies.data.total_results
+            }
     },
     created() {
-        bus.$on('gotSearchResults', movies => {
-            console.log('rendering results')
-            this.movies = movies.data.results
-            this.numOfResults = movies.data.total_results
-        })
-        
+        this.getSearchResults(this.$route.params.query)
+    },
+    beforeUpdate() {
+        this.getSearchResults(this.$route.params.query)
     }
 }
 </script>

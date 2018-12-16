@@ -15,7 +15,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/results',
+      path: '/results/:query',
       name: 'results',
       component: Results
     },
