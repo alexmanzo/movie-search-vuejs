@@ -1,16 +1,18 @@
 <template>
     <div id="results">
-        <p>Your search returned {{ numOfResults }} results</p>
+        <p class="results-num"> Your search returned {{ numOfResults }} results</p>
         <ul id="movies">
             <li v-for="movie in movies" :key="movie.id">
-               <div class="movie-card">
-                <img v-if="movie.poster_path === null" class="results-no-poster" :src="noPhoto" alt='no poster found' />
-                <img v-else class="results-poster" :src="`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`" :alt="`${movie.original_title}`" />
-                <div class="movie-search-info">
-                    <h1>{{ movie.original_title }} ({{ movie.release_date.substring(0,4) }})</h1>
-                    <p>{{ movie.overview }}</p>
-                </div>
-            </div>
+               <router-link :to="{ name: 'movie', params: { id:  movie.id  }}">
+                    <div class="movie-card">
+                        <img v-if="movie.poster_path === null" class="results-no-poster" :src="noPhoto" alt='no poster found' />
+                        <img v-else class="results-poster" :src="`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`" :alt="`${movie.original_title}`" />
+                        <div class="movie-search-info">
+                            <h1>{{ movie.original_title }} ({{ movie.release_date.substring(0,4) }})</h1>
+                            <p>{{ movie.overview }}</p>
+                        </div>
+                    </div>
+                </router-link>
             </li>
         </ul>
     </div>
@@ -37,16 +39,25 @@ export default {
     },
     created() {
         bus.$on('gotSearchResults', movies => {
+            console.log('rendering results')
             this.movies = movies.data.results
             this.numOfResults = movies.data.total_results
         })
-        console.log(this.movies)
+        
     }
 }
 </script>
 
 <style scoped>
-.results {
+ul {
+    padding-inline-start: 0;
+}
+
+li {
+    list-style: none;
+}
+
+#results {
     padding-top: 25px;
     display: flex;
     flex-direction: column;
@@ -62,7 +73,7 @@ export default {
 }
 
 .results-num {
-    font-size: 1vmax;
+    font-size: 14px;
     padding-bottom: 15px;
 }
 
@@ -76,7 +87,7 @@ export default {
     border: solid 1px #01d277;
     border-radius: 10px;
     width: 80%;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
     overflow: auto;
 }
 
@@ -104,12 +115,12 @@ export default {
     background-color: #cbcbcb;
 }
 
-.movie-card>a {
+a {
     text-decoration: none;
     color: #fff;
 }
 
-.movie-card:hover>a {
+a:hover {
     color: #081c24;
 }
 
@@ -118,12 +129,9 @@ export default {
 @media only screen and (max-width: 650px) {
 
     .movie-card {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
         width: 95vw;
         height: 100vh;
-        overflow: scroll;
+        overflow: auto;
     }
 
     .movie-search-info {
@@ -135,11 +143,9 @@ export default {
 @media only screen and (max-width: 768px) {
 
     .movie-card {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
         width: 75vw;
         height: auto;
+        overflow: auto;
     }
 
     .movie-search-info>p {

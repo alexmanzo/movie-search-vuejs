@@ -1,11 +1,11 @@
 <template>
     <header class="app-header">
-        <img :src="logo" class="App-logo" alt="logo" />
-        <form class="search-form">
+        <router-link :to="{ name: 'home' }"><img :src="logo" class="app-logo" alt="logo" /></router-link>
+        <form class="search-form" @submit.prevent="getSearchResults">
             <input type="text" name="userInput" v-model="searchTerm"/>
             <span class="search-bar"></span>
             <label for="userInput">Enter a movie title...</label>
-            <button @click.prevent="getSearchResults" class="search-button"></button>
+            <button class="search-button"></button>
         </form>
         <hr />
     </header>
@@ -30,11 +30,12 @@
                 const apiKey = process.env.VUE_APP_API_KEY
                 let results = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${this.searchTerm}`)
                 this.searchTerm = ''
-                console.log(results)
+                router.push({ name: 'results' })
                 bus.$emit('gotSearchResults', results)
-                router.push("results")
+                console.log('results emitted')
             }
         }
+        
     }
 </script>
 
@@ -187,16 +188,14 @@
 
     /* Media Queries */
     @media only screen and (max-width: 650px) {
-        .App-header {
+        .app-header {
             display: flex;
             flex-direction: column;
-            margin-top: 20px;
         }
 
-        .App-logo {
+        .app-logo {
             width: 65vw;
-            margin-left: 5%;
-            margin-right: 10%;
+            margin: 20px auto 0 auto;
         }
 
         .search-form {
@@ -223,7 +222,7 @@
 
     /* iPhone 4, 5, SE Landscape */
     @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
-        .App-logo {
+        .app-logo {
             width: 35vw;
             margin-left: 5%;
             margin-right: 10%;
