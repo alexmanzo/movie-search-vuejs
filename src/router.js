@@ -23,6 +23,11 @@ export default new Router({
       path: '/movie/:id',
       name: 'movie',
       component: () => import ('@/views/MoviePage.vue')
+    },
+    {
+      path: '/genre/:id-:name',
+      name: 'genre',
+      component: Results
     }
     
 

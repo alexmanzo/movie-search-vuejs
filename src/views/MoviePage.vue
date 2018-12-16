@@ -1,27 +1,19 @@
 <template>
   <div id="moviePage">
       <app-header></app-header>
-      <h1>Movie Page</h1>
+      <movie-page></movie-page>
   </div>
 </template>
 
 <script>
-// IMPORTS //
-import header from '@/components/header.vue'
-
-
+import moviePage from '@/components/moviePage.vue'
 export default {
-    data () {
-        return {
-
-        }
-    },
-    methods: {
-
-    }
+  name: 'moviePage',
+  components: {
+    'movie-page': moviePage
+  }
 }
 </script>
 
 <style>
-
 </style>

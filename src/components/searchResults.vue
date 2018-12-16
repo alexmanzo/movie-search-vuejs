@@ -18,9 +18,6 @@
     </div>
 </template>
 
-
-
-
 <script>
 // IMPORTS //
 import axios from 'axios'
