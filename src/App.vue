@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{backgroundImage: `${ backdrop }`}">
       <div id="outer-container">
           <router-view></router-view>
       </div>  
@@ -12,11 +12,16 @@
 export default {
     data () {
         return {
-
+            backdrop: ''
         }
     },
     methods: {
 
+    },
+    beforeUpdate(){
+        this.$root.$on('changeBackground', path => {
+            this.backdrop = path
+        })
     }
 }
 </script>

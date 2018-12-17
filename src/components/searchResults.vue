@@ -49,6 +49,9 @@ export default {
 </script>
 
 <style scoped>
+#app {
+    background-image: '';
+}
 ul {
     padding-inline-start: 0;
 }

@@ -45,6 +45,7 @@ export default {
                 this.castData = castData.data
                 this.videoData = videoData.data
                 this.similarMoviesData = similarMoviesData.data
+                this.$root.$emit('changeBackground', `url('https://image.tmdb.org/t/p/original/${movieData.data.backdrop_path}')`)
             }
     },
     created() {
@@ -52,7 +53,11 @@ export default {
     },
     beforeUpdate() {
         this.getMovieData()
+    },
+    beforeDestroy() {
+        this.$root.$emit('changeBackground', '')
     }
+
 }
 </script>
 
