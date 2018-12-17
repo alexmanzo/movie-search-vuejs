@@ -2,7 +2,7 @@
   "name": "movie-search-vuejs",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/alexmanzo/movie-search-vuejs",
+  "homepage": "https://alexmanzo.github.io/movie-search-vuejs/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
