@@ -28,6 +28,11 @@ export default new Router({
       path: '/genre/:id-:name',
       name: 'genre',
       component: Results
+    },
+    {
+      path: '/cast/:id-:name',
+      name: 'castProfile',
+      component: () => import ('@/views/Profile.vue')
     }
     
 

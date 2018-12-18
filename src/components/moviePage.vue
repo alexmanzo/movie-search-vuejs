@@ -5,18 +5,21 @@
         </div>
         <div v-else class="movie-container">
             <movie-details :movieData="movieData"></movie-details>
+            <cast :castData="castData"></cast>
         </div>
     </div>
 </template>
 
 <script>
 import movieDetails from '@/components/movieDetails.vue'
+import cast from '@/components/cast.vue'
 import axios from 'axios'
 const apiKey = process.env.VUE_APP_API_KEY
 
 export default {
     components: {
-        'movie-details': movieDetails
+        'movie-details': movieDetails,
+        'cast': cast
     },
     data () {
         return {
@@ -42,7 +45,7 @@ export default {
         async getMovieData() {
                 const [movieData, castData, videoData, similarMoviesData] = await Promise.all([this.getMovieDetails(), this.getMovieCast(), this.getVideos(), this.getSimilarMovies()])
                 this.movieData = movieData.data
-                this.castData = castData.data
+                this.castData = castData.data.cast
                 this.videoData = videoData.data
                 this.similarMoviesData = similarMoviesData.data
                 this.$root.$emit('changeBackground', `url('https://image.tmdb.org/t/p/original/${movieData.data.backdrop_path}')`)
@@ -257,11 +260,11 @@ a:hover, {
 }
 
 .slick-prev {
-    left: -30px;
+    left: -20px;
 }
 
 .slick-next {
-    right: -35px
+    right: -30px
 }
 
 .slick-prev:before {
@@ -345,7 +348,7 @@ a:hover, {
     .similar-movies,
     .videos,
     .movie {
-        width: 90vw;
+        width: 85vw;
         text-align: center;
     }
 

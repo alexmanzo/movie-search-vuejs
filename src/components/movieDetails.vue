@@ -41,7 +41,7 @@
                 <div class="genres">
                     <p><strong>Genres</strong><br />
                         <ul>
-                           <li v-for="genre in movieData.genres" :key="genre.name"><router-link :to="{ name: 'genre', params: { id:  genre.id, name: genre.id  }}">{{ genre.name }}</router-link></li>
+                           <li v-for="genre in movieData.genres" :key="genre.name"><router-link :to="{ name: 'genre', params: { id:  genre.id, name: genre.name  }}">{{ genre.name }}</router-link></li>
                         </ul>
 					</p>
                 </div>

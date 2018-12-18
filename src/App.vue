@@ -43,13 +43,12 @@ body {
     background-size: cover;
     height: 100%;
     animation: fadein ease-out 1.4s;
+    background-attachment: fixed;
 }
 
 #outer-container {
     background-image: linear-gradient(rgba(0, 0, 0, 0.9) 35%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 1) 100%);
-    background-attachment: scroll;
     margin: 0;
-    height: 120vh;
 }
 
 </style>
