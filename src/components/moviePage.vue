@@ -6,6 +6,7 @@
         <div v-else class="movie-container">
             <movie-details :movieData="movieData"></movie-details>
             <cast :castData="castData"></cast>
+            <similar-movies :similarMoviesData="similarMoviesData"></similar-movies>
         </div>
     </div>
 </template>
@@ -13,13 +14,15 @@
 <script>
 import movieDetails from '@/components/movieDetails.vue'
 import cast from '@/components/cast.vue'
+import similarMovies from '@/components/similarMovies.vue'
 import axios from 'axios'
 const apiKey = process.env.VUE_APP_API_KEY
 
 export default {
     components: {
         'movie-details': movieDetails,
-        'cast': cast
+        'cast': cast,
+        'similar-movies': similarMovies
     },
     data () {
         return {
@@ -47,20 +50,17 @@ export default {
                 this.movieData = movieData.data
                 this.castData = castData.data.cast
                 this.videoData = videoData.data
-                this.similarMoviesData = similarMoviesData.data
+                this.similarMoviesData = similarMoviesData.data.results
                 this.$root.$emit('changeBackground', `url('https://image.tmdb.org/t/p/original/${movieData.data.backdrop_path}')`)
-            }
+        }
     },
     created() {
         this.getMovieData()
-    },
-    beforeUpdate() {
-        this.getMovieData()
+        console.log('created')
     },
     beforeDestroy() {
         this.$root.$emit('changeBackground', '')
     }
-
 }
 </script>
 
@@ -138,20 +138,23 @@ a:visited {
 
 a:hover {
     text-decoration: none;
+    color: #01d277
 }
 
 a:active {
     color: #fff;
 }
 
-a:hover, {
-    color: #01d277;
-}
-
 .cast-container>a,
 .similar-movie-container>a {
     text-decoration: none;
     color: #fff;
+}
+
+.cast-container>a:hover,
+.similar-movie-container>a:hover {
+    text-decoration: none;
+    color:  #01d277;
 }
 
 

@@ -1,7 +1,7 @@
 <template>
   <div id="app" :style="{backgroundImage: `${ backdrop }`}">
       <div id="outer-container">
-          <router-view></router-view>
+          <router-view :key="$route.fullPath"></router-view>
       </div>  
   </div>
 </template>

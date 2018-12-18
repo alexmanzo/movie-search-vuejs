@@ -1,14 +1,12 @@
 <template>
-    <div class="cast">
-        <h2>Cast</h2>
+    <div class="similar-movies">
+        <h2>Similar Movies</h2>
         <slick ref="slick" :options="slickOptions">
-            <div v-for="credit in castData" :key="credit.credit_id" class="cast-container">
-                <router-link :to="{ name: 'castProfile', params: { id:  credit.id, name: credit.name  }}">
-                    <img v-if="credit.profile_path === null" class="cast-nophoto" :src="noPhoto" alt='no profile found' />
-                    <img v-else class="cast-photo" :src="`https://image.tmdb.org/t/p/w1280/${credit.profile_path}`"
-                        :alt="`${credit.name}`" />
-                    <p class="actor">{{ credit.name }}</p>
-                    <p class="character">{{ credit.character }}</p>
+            <div v-for="movie in similarMoviesData" :key="movie.id" class="similar-movie-container">
+                <router-link :to="{ name: 'movie', params: { id:  movie.id }}">
+                    <img v-if="movie.poster_path === null" class="similar-movie-nophoto" :src="noPhoto" alt='no poster found' />
+                    <img v-else class="similar-movie-photo" :src="`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`" :alt="`${movie.original_title}`" />
+                    <p class="similar-movie-title">{{ movie.original_title }} ({{ movie.release_date.substring(0,4) }})</p>
                 </router-link>
             </div>
         </slick>
@@ -21,7 +19,7 @@ import Slick from 'vue-slick'
 
 export default {   
     props: {
-        castData: {
+        similarMoviesData: {
             type: Array,
             required: true
         }
@@ -64,9 +62,9 @@ export default {
         }
     },
     methods: {
-
     },
     created() {
+        
     }
 }
 </script>
