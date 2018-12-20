@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d217357"],{c66d:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",{staticClass:"cast-page"},[t("app-header"),t("h2",[e._v("HI MOM")])],1)},s=[],c={name:"castProfile",components:{}},l=c,o=t("2877"),i=Object(o["a"])(l,a,s,!1,null,null,null);i.options.__file="Profile.vue";n["default"]=i.exports}}]);
+//# sourceMappingURL=chunk-2d217357.0f484a4d.js.map

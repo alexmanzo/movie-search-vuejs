@@ -7,7 +7,6 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: '/movie-search-vuejs',
   routes: [
     {
       path: '/',
