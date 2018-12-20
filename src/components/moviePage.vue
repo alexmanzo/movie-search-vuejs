@@ -7,6 +7,7 @@
             <movie-details :movieData="movieData"></movie-details>
             <cast :castData="castData"></cast>
             <similar-movies :similarMoviesData="similarMoviesData"></similar-movies>
+            <videos :videoData="videoData"></videos>
         </div>
     </div>
 </template>
@@ -15,6 +16,7 @@
 import movieDetails from '@/components/movieDetails.vue'
 import cast from '@/components/cast.vue'
 import similarMovies from '@/components/similarMovies.vue'
+import videos from '@/components/videos.vue'
 import axios from 'axios'
 const apiKey = process.env.VUE_APP_API_KEY
 
@@ -22,7 +24,8 @@ export default {
     components: {
         'movie-details': movieDetails,
         'cast': cast,
-        'similar-movies': similarMovies
+        'similar-movies': similarMovies,
+        'videos': videos
     },
     data () {
         return {
@@ -49,14 +52,13 @@ export default {
                 const [movieData, castData, videoData, similarMoviesData] = await Promise.all([this.getMovieDetails(), this.getMovieCast(), this.getVideos(), this.getSimilarMovies()])
                 this.movieData = movieData.data
                 this.castData = castData.data.cast
-                this.videoData = videoData.data
+                this.videoData = videoData.data.results
                 this.similarMoviesData = similarMoviesData.data.results
                 this.$root.$emit('changeBackground', `url('https://image.tmdb.org/t/p/original/${movieData.data.backdrop_path}')`)
         }
     },
     created() {
         this.getMovieData()
-        console.log('created')
     },
     beforeDestroy() {
         this.$root.$emit('changeBackground', '')

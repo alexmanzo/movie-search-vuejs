@@ -1,7 +1,7 @@
 <template>
     <div class="similar-movies">
         <h2>Similar Movies</h2>
-        <slick ref="slick" :options="slickOptions">
+        <slick ref="slick" :options="slickOptions" class="slider-list">
             <div v-for="movie in similarMoviesData" :key="movie.id" class="similar-movie-container">
                 <router-link :to="{ name: 'movie', params: { id:  movie.id }}">
                     <img v-if="movie.poster_path === null" class="similar-movie-nophoto" :src="noPhoto" alt='no poster found' />
@@ -29,7 +29,6 @@ export default {
         return {
             noPhoto,
             slickOptions: {
-            class: 'slider-list',
             speed: 1000,
             slidesToShow: 5,
             slidesToScroll: 4,
