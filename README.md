@@ -4,14 +4,15 @@
 <p>This movie search project was created in Vue.js, and is a refactored version of previous Movie Search projects created using jQuery and react.</p>
 
 <h2>Screenshots</h2>
-<h3>Movie Page</h3>
+<h3>Homepage</h3>
 	<img src='./screenshots/homepage.png' alt='screenshot of movie search homepage' />
+<h3>Movie Page</h3>
 	<img src='./screenshots/moviepage.png' alt='screenshot of first man movie page' />
-    <img src='./screenshots/cast-similarmovies.png' alt='screenshot of first man movie page' />
+    	<img src='./screenshots/cast-similarmovies.png' alt='screenshot of first man movie page' />
 <h3>Search Results</h3>
 	<img src='./screenshots/searchresults.png' alt='screenshot of search results' />
 
-<h2>Techonologies Used</h2>
+<h2>Technologies Used</h2>
 <p>This project was created using the following technologies:</p>
 <ul>
 <li>Vue.js</li>
