@@ -7,7 +7,6 @@
 
 <script>
 import noPhoto from '@/assets/nophoto.svg'
-import Slick from 'vue-slick'
 import carousel from '@/components/carousel.vue'
 
 export default {   

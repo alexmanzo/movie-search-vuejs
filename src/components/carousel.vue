@@ -7,7 +7,7 @@
         :style="{ transform: 'translateX' + '(' + currentOffset + 'px' + ')'}"
       >
         <div ref="card" class="carousel--card" v-for="(item, index) in items" :key="index">
-          <div v-if="item.site === 'YouTube'" class="video-container">
+          <div v-if="item.site === 'YouTube'" class="carousel--card--video">
             <iframe
               :title="`${item.name}`"
               id="ytplayer"
@@ -56,17 +56,16 @@
 </template>
 
 <script>
-import noPhoto from "@/assets/nophoto.svg";
+import noPhoto from '@/assets/nophoto.svg'
 export default {
   props: {
     items: {
       type: Array,
-      required: true
+      required: true,
     },
     routerName: {
       type: String,
-      required: true
-    }
+    },
   },
   data() {
     return {
@@ -74,54 +73,59 @@ export default {
       currentOffset: 0,
       paginationFactor: 200,
       carouselWidth: 1000,
-      numOfCards: 5
-    };
+      numOfCards: 5,
+    }
   },
   computed: {
     atEndOfList() {
       return (
         this.currentOffset <=
         this.paginationFactor * -1 * (this.items.length - this.numOfCards)
-      );
+      )
     },
     atHeadOfList() {
-      return this.currentOffset === 0;
-    }
+      return this.currentOffset === 0
+    },
   },
   methods: {
     moveCarousel(direction) {
-      this.setPagination();
+      this.setPagination()
       if (direction === 1 && !this.atEndOfList) {
-        this.currentOffset -= this.paginationFactor;
+        this.currentOffset -= this.paginationFactor
       } else if (direction === -1 && !this.atHeadOfList) {
-        this.currentOffset += this.paginationFactor;
+        this.currentOffset += this.paginationFactor
       }
     },
     setPagination() {
-      this.paginationFactor = this.$refs.card[0].clientWidth + 20;
+      this.paginationFactor = this.$refs.card[0].clientWidth + 20
     },
     setWidth() {
       if (window.outerWidth < 640) {
         this.numOfCards = 1
       } else if (window.innerWidth < 768) {
-          this.numOfCards = 3
+        this.numOfCards = 3
       } else if (window.innerWidth > 1440) {
-          this.numOfCards = 6
-      } else {
+        this.numOfCards = 6 
+      } else if (this.$refs.card[0].innerHTML.includes('<div class="carousel--card--video"')) {
+        this.numOfCards = 1
+      }  else {
         this.numOfCards = 5
       }
-      const newWidth = this.$refs.card[0].clientWidth * this.numOfCards;
-      this.carouselWidth = newWidth + 20 * this.numOfCards;
-    }
+      const newWidth = this.$refs.card[0].clientWidth * this.numOfCards
+      this.carouselWidth = newWidth + 20 * this.numOfCards
+    },
+  },
+  updated() {
+    this.setWidth()
   },
   mounted() {
-    this.setWidth();
+    this.setWidth()
   }
-};
+}
 </script>
 
 <style lang="scss">
-@import "main.scss";
+@import 'main.scss';
 
 .carousel-wrapper {
   display: flex;
@@ -166,6 +170,7 @@ export default {
       transform: rotate(45deg) scale(0.9);
     }
   }
+
 }
 
 .carousel-items {
@@ -215,6 +220,16 @@ export default {
         &:nth-of-type(2) {
           @include setFontSize(14px);
         }
+      }
+    }
+
+    &--video {
+
+      margin-bottom: 20vh;
+    
+      iframe {
+      height: 30vh;
+      width: 64vh;
       }
     }
   }
