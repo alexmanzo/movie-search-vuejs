@@ -7,35 +7,35 @@
         :style="{ transform: 'translateX' + '(' + currentOffset + 'px' + ')'}"
       >
         <div ref="card" class="carousel--card" v-for="(item, index) in items" :key="index">
-            <router-link :to="{ name: routerName, params: { id:  item.id, name: item.name  }}">
-              <img
-                v-if="item.profile_path === null || item.poster_path === null"
-                id="no-photo"
-                :src="noPhoto"
-                alt="no profile found"
-              >
-              <img
-                v-else-if="!item.profile_path"
-                :src="`https://image.tmdb.org/t/p/w1280/${item.poster_path}`"
-                :alt="`${item.original_title}`"
-              >
-              <img
-                v-else
-                :src="`https://image.tmdb.org/t/p/w1280/${item.profile_path}`"
-                :alt="`${item.name}`"
-              >
-              <div v-if="!item.name" class="carousel--card--footer">
-                <p>
-                  <strong>{{ item.original_title }} ({{ item.release_date.substring(0,4) }})</strong>
-                </p>
-              </div>
-              <div v-else class="carousel--card--footer">
-                <p>
-                  <strong>{{ item.name }}</strong>
-                </p>
-                <p>{{ item.character }}</p>
-              </div>
-            </router-link>
+          <router-link :to="{ name: routerName, params: { id:  item.id, name: item.name  }}">
+            <img
+              v-if="item.profile_path === null || item.poster_path === null"
+              id="no-photo"
+              :src="noPhoto"
+              alt="no profile found"
+            >
+            <img
+              v-else-if="!item.profile_path"
+              :src="`https://image.tmdb.org/t/p/w1280/${item.poster_path}`"
+              :alt="`${item.original_title}`"
+            >
+            <img
+              v-else
+              :src="`https://image.tmdb.org/t/p/w1280/${item.profile_path}`"
+              :alt="`${item.name}`"
+            >
+            <div v-if="!item.name" class="carousel--card--footer">
+              <p>
+                <strong>{{ item.original_title }} ({{ item.release_date.substring(0,4) }})</strong>
+              </p>
+            </div>
+            <div v-else class="carousel--card--footer">
+              <p>
+                <strong>{{ item.name }}</strong>
+              </p>
+              <p>{{ item.character }}</p>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -85,25 +85,11 @@ export default {
       }
     },
     setPagination() {
-      this.paginationFactor = this.$refs.card[0].clientWidth + 20
-    },
-    setWidth() {
-      if (window.outerWidth < 640) {
-        this.numOfCards = 1
-      } else if (window.innerWidth < 768) {
-        this.numOfCards = 3
-      } else if (window.innerWidth > 1440) {
-        this.numOfCards = 6 
-      } else {
-        this.numOfCards = 5
-      }
-      const newWidth = this.$refs.card[0].clientWidth * this.numOfCards
-      this.carouselWidth = newWidth + 20 * this.numOfCards
+      this.paginationFactor = this.$refs.card[0].clientWidth + 30
     },
   },
-  updated() {
-    this.setWidth()
-  }
+  updated() {},
+  mounted() {},
 }
 </script>
 
@@ -114,12 +100,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 }
 
 .carousel {
   justify-content: center;
   box-sizing: border-box;
-  height: 40vh;
   overflow: hidden;
 
   &--overflow-container {
@@ -153,7 +139,6 @@ export default {
       transform: rotate(45deg) scale(0.9);
     }
   }
-
 }
 
 .carousel-items {
@@ -171,7 +156,7 @@ export default {
 
   .carousel--card {
     cursor: pointer;
-    margin: 0 10px;
+    margin: 0 15px;
 
     &:first-child {
       margin-left: 0;
@@ -182,7 +167,7 @@ export default {
     }
 
     img {
-      height: 30vh;
+      height: 50vh;
       border-radius: 4px;
       vertical-align: bottom;
 
@@ -203,6 +188,16 @@ export default {
         &:nth-of-type(2) {
           @include setFontSize(14px);
         }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $small) {
+  .carousel-items {
+    .carousel--card {
+      img {
+        height: 60vh;
       }
     }
   }

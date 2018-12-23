@@ -38,7 +38,7 @@
               <router-link
                 :to="{ name: 'genre', params: { id:  genre.id, name: genre.name  }}"
               >{{ genre.name }}</router-link>
-              <span v-if="index < movieData.genres.length - 1">/</span>
+              <span v-if="index < movieData.genres.length - 1">&nbsp;/&nbsp;</span>
             </span>
           </p>
         </div>

@@ -36,6 +36,10 @@ body {
     background-color: $blue;
 }
 
+h2 {
+    text-align: center;
+}
+
 #app {
     color: $white;
     font-family: $font;
