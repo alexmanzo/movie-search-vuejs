@@ -1,29 +1,25 @@
-# movie-search-vuejs
+<h1>Movie Search App React</h1>
 
-## Project setup
-```
-npm install
-```
+<h2>Summary</h2>
+<p>This movie search project was created in Vue.js, and is a refactored version of previous Movie Search projects created using jQuery and react.</p>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+<h2>Screenshots</h2>
+<h3>Movie Page</h3>
+	<img src='./screenshots/homepage.png' alt='screenshot of movie search homepage' />
+	<img src='./screenshots/moviepage.png' alt='screenshot of first man movie page' />
+    <img src='./screenshots/cast-similarmovies.png' alt='screenshot of first man movie page' />
+<h3>Search Results</h3>
+	<img src='./screenshots/searchresults.png' alt='screenshot of search results' />
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<h2>Techonologies Used</h2>
+<p>This project was created using the following technologies:</p>
+<ul>
+<li>Vue.js</li>
+<li>Vue Router</li>
+<li>Sass</li>
+<li>Axios</li>
+<li>Moment.js</li>
+<li>Vue.js</li>
+</ul>
+<h2>Author</h2>
+<p>This project was created by Alex Manzo.</p>
