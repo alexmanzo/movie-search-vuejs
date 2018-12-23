@@ -1,17 +1,12 @@
 <template>
-  <div class="carousel-wrapper">
+  <div class="carousel-wrapper" ref="wrapper">
     <div class="carousel--nav__left" @click="moveCarousel(-1)" :disabled="atHeadOfList"></div>
-    <div class="carousel" ref="carousel">
+    <div class="carousel" :style="{ width: carouselWidth + 'px'}">
       <div
         class="carousel-items"
         :style="{ transform: 'translateX' + '(' + currentOffset + 'px' + ')'}"
       >
-        <div
-          ref="card"
-          class="carousel--card"
-          v-for="(item, index) in items"
-          :key="index"
-        >
+        <div ref="card" class="carousel--card" v-for="(item, index) in items" :key="index">
           <div v-if="item.site === 'YouTube'" class="video-container">
             <iframe
               :title="`${item.name}`"
@@ -77,22 +72,21 @@ export default {
     return {
       noPhoto,
       currentOffset: 0,
-      windowSize: 5,
       paginationFactor: 200,
-      numOfCards: 4,
-      overflow: false
+      carouselWidth: 1000,
+      numOfCards: 5
     };
   },
   computed: {
     atEndOfList() {
       return (
         this.currentOffset <=
-        this.paginationFactor * -1 * (this.items.length - this.windowSize)
+        this.paginationFactor * -1 * (this.items.length - this.numOfCards)
       );
     },
     atHeadOfList() {
       return this.currentOffset === 0;
-    },
+    }
   },
   methods: {
     moveCarousel(direction) {
@@ -104,14 +98,31 @@ export default {
       }
     },
     setPagination() {
-      this.paginationFactor = this.$refs.card[0].clientWidth + 20
+      this.paginationFactor = this.$refs.card[0].clientWidth + 20;
+    },
+    setWidth() {
+      if (window.outerWidth < 640) {
+        this.numOfCards = 1
+      } else if (window.innerWidth < 768) {
+          this.numOfCards = 3
+      } else if (window.innerWidth > 1440) {
+          this.numOfCards = 6
+      } else {
+        this.numOfCards = 5
+      }
+      const newWidth = this.$refs.card[0].clientWidth * this.numOfCards;
+      this.carouselWidth = newWidth + 20 * this.numOfCards;
     }
+  },
+  mounted() {
+    this.setWidth();
   }
 };
 </script>
 
 <style lang="scss">
 @import "main.scss";
+
 .carousel-wrapper {
   display: flex;
   align-items: center;
@@ -120,7 +131,7 @@ export default {
 
 .carousel {
   justify-content: center;
-  width: 100%;
+  box-sizing: border-box;
   height: 40vh;
   overflow: hidden;
 

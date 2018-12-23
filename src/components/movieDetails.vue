@@ -111,7 +111,7 @@ a:visited {
     color: $lightgray;
 }
 
-@media only screen and (max-width: $small) {
+@media only screen and (max-width: $medium) {
     #movie-plot,
     #movie-headline,
     #movie-details {
