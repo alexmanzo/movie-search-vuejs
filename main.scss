@@ -1,0 +1,36 @@
+// ------- Breakpoints ------- //
+$x-small: 480px;
+$small: 640px;
+$medium: 768px;
+$large: 1440px;
+$x-large: 1920px;
+
+
+// ------- Colors ------- //
+$blue: #081c24;
+$gray: #cbcbcb;
+$green: #01d277;
+$lightgray: #b2b2b2;
+$white: #fff;
+
+// ------- Fonts ------- //
+$font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+sans-serif;
+
+@mixin setFontSize($font-size) {
+    font-size: $font-size;
+    @media screen and (max-width: $large) {
+      font-size: $font-size - 2px;
+    }
+}
+
+// ------- Global Styling Items ------- //
+#no-poster {
+  background-color: $gray;
+  width: 100%;
+}
+
+// ------- Transitions ------- //
+$ease: 0.2s ease all;
+

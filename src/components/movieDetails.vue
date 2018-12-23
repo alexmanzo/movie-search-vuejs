@@ -1,89 +1,130 @@
 <template>
-    <div class="movie">
-        <img v-if="movieData.poster_path === null" class="movie-page-no-poster" :src="noPhoto" alt='no poster found' />
-        <img v-else class="movie-page-poster" :src="`https://image.tmdb.org/t/p/w1280/${movieData.poster_path}`" :alt="`${movieData.original_title}`" />
-        <div class="movie-data">
-            <div class="movie-headline">
-                <h1>{{ movieData.original_title }} ({{ movieData.release_date.substring(0,4) }})</h1>
-                <h4>{{ movieData.tagline }}</h4>
-            </div>
-            <div class="movie-details">
-                <p>
-                    <strong>Budget</strong>
-                    <br />
-                    <span v-if="movieData.budget === 0">
-                        N/A
-                    </span> 
-                    <span v-else>
-                        ${{ movieData.budget.toLocaleString() }}
-                    </span>
-                </p>
-                <p>
-                    <strong>Revenue</strong>
-                    <br />
-                    <span v-if="movieData.revenue === 0">
-                        N/A
-                    </span>
-                    <span v-else>
-                        ${{ movieData.revenue.toLocaleString() }}
-                    </span>
-                </p>
-                <p>
-                    <strong>Runtime</strong>
-                    <br />
-                    <span v-if="movieData.runtime === null">
-                        N/A
-                    </span>
-                    <span v-else>
-                        {{ movieData.runtime }} minutes
-                    </span>
-                </p>
-                <div class="genres">
-                    <p><strong>Genres</strong><br />
-                        <ul>
-                           <li v-for="genre in movieData.genres" :key="genre.name"><router-link :to="{ name: 'genre', params: { id:  genre.id, name: genre.name  }}">{{ genre.name }}</router-link></li>
-                        </ul>
-					</p>
-                </div>
-            </div>
-            <div class="movie-plot">
-                    <p><strong>Plot</strong><br />{{ movieData.overview }}</p>
-            </div>
+  <div id="movie">
+    <img v-if="movieData.poster_path === null" id="no-poster" :src="noPhoto" alt="no poster found">
+    <img v-else :src="`https://image.tmdb.org/t/p/w1280/${movieData.poster_path}`" :alt="`${movieData.original_title}`">
+    <div id="movie-info">
+      <div id="movie-headline">
+        <h1>{{ movieData.original_title }} ({{ movieData.release_date.substring(0,4) }})</h1>
+        <h4>{{ movieData.tagline }}</h4>
+      </div>
+      <div id="movie-details">
+        <p>
+          <strong>Budget</strong>
+          <br>
+          <span v-if="movieData.budget === 0">N/A</span>
+          <span v-else>${{ movieData.budget.toLocaleString() }}</span>
+        </p>
+        <p>
+          <strong>Revenue</strong>
+          <br>
+          <span v-if="movieData.revenue === 0">N/A</span>
+          <span v-else>${{ movieData.revenue.toLocaleString() }}</span>
+        </p>
+        <p>
+          <strong>Runtime</strong>
+          <br>
+          <span v-if="movieData.runtime === null">N/A</span>
+          <span v-else>{{ movieData.runtime }} minutes</span>
+        </p>
+        <div id="movie-genres">
+          <p>
+            <strong>Genres</strong>
+            <br>
+            <span v-for="(genre, index) in movieData.genres" :key="genre.name">
+              <router-link :to="{ name: 'genre', params: { id:  genre.id, name: genre.name  }}">{{ genre.name }}</router-link>
+              <span v-if="index < movieData.genres.length - 1"> / </span>
+            </span>
+          </p>
         </div>
+      </div>
+      <div id="movie-plot">
+        <p>
+          <strong>Plot</strong>
+          <br>
+          {{ movieData.overview }}
+        </p>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-
+import noPhoto from "@/assets/nophoto.svg";
 export default {
-    props: {
-        movieData: {
-            type: Object,
-            required: true
-        }
-    },
-    data () {
-        return {
-            
-        }
-    },
-    methods: {
-
-    },
-    created() {
-        
+  props: {
+    movieData: {
+      type: Object,
+      required: true
     }
-}
+  },
+  data() {
+    return {
+      noPhoto
+    };
+  },
+  methods: {},
+  created() {}
+};
 </script>
 
-<style scoped>
-    ul {
-        padding-inline-start: 0;
+<style lang="scss" scoped>
+@import "main.scss";
+
+img {
+  height: 100%;
+  margin-right: 30px;
+  border-radius: 10px;
+  border: 1px solid $white;
+}
+
+#movie-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#movie-headline {
+    flex-basis: 100%;
+    margin-bottom: -5vh;
+}
+
+#movie-details {
+    flex-basis: 30%;
+}
+
+#movie-plot {
+    flex-basis: 70%;
+}
+
+a {
+    color: $green;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    color: $white;
+}
+
+a:visited {
+    color: $lightgray;
+}
+
+@media only screen and (max-width: $small) {
+    #movie-plot,
+    #movie-headline,
+    #movie-details {
+        margin: 0 auto;
+        flex-basis: 100%;
     }
 
-    li {
-        list-style: none;
+    img {
+      width: 100%;
+      height: auto;
+      margin-right: 0;
     }
+}
 </style>
 
 

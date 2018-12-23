@@ -1,9 +1,9 @@
 <template>
-    <form class="search-form" @submit.prevent="submitSearch">
+    <form id="search-form" @submit.prevent="submitSearch">
         <input type="text" name="userInput" v-model="searchTerm" />
         <span class="search-bar"></span>
         <label for="userInput">Enter a movie title...</label>
-        <button class="search-button"></button>
+        <button></button>
     </form>
 </template>
 
@@ -26,157 +26,138 @@ export default {
 }
 </script>
 
-<style>
-.search-form {
-        position: relative;
+<style lang="scss" scoped>
+@import 'main.scss';
+
+#search-form {
+    position: relative;
+}
+
+input {
+    @include setFontSize(20px);
+    background-color: transparent;
+    color: $white;
+    padding: 10px;
+    width: 350px;
+    border: none;
+    border-bottom: 1px solid $green;
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Label */
+label {
+    @include setFontSize(20px);
+    color: $white;
+    font-style: italic;
+    opacity: 0.5;
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    transition: $ease;
+    -moz-transition: $ease;
+    -webkit-transition: $ease;
+    pointer-events: none;    
+}
+
+/* Label Active State */
+input:focus~label {
+    top: -17px;
+    left: 0px;
+    font-style: normal;
+    opacity: 1.0;
+    font-size: 14px;
+    color: $white;
+}
+
+/* Bottom Bar */
+.search-bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.search-bar:before,
+.search-bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    position: absolute;
+    background: $green;
+    transition: $ease;
+    -moz-transition: $ease;
+    -webkit-transition: $ease;
+}
+
+.search-bar:before {
+    left: 50%;
+}
+
+.search-bar:after {
+    right: 50%;
+}
+
+/* Bottom Bar Active State */
+input:focus~.search-bar:before,
+input:focus~.search-bar:after {
+    width: 50%;
+}
+
+/* Button */
+
+button {
+    @include setFontSize(20px);
+    position: absolute;
+    border: 2px solid $green;
+    border-radius: 10px;
+    padding: 0 5% 0 5%;
+    left: 380px;
+    top: 18px;
+    background-color: transparent;
+    color: $green;
+    transition: $ease;
+    -moz-transition: $ease;
+    -webkit-transition: $ease;
+}
+
+button:focus {
+    outline: none;
+    color: $white;
+    border: 2px solid $white;
+}
+
+button:after {
+    content: '\279e';
+}
+
+button:hover {
+    background-color: $green;
+    color: #081c24;
+}
+
+button:active {
+    background-color: $white;
+    color: #081c24;
+}
+
+/* Media Queries */
+@media only screen and (max-width: $small) {
+
+    .search-form {
+        margin-right: 15%;
     }
 
     input {
-        background-color: transparent;
-        color: #ffffff;
-        font-size: 18px;
-        padding: 10px 10px 10px 10px;
-        width: 350px;
-        border: none;
-        border-bottom: 1px solid #01d277;
+        width: 200px;
     }
 
-    input:focus {
-        outline: none;
+    button {
+        padding: 0 15px 0 15px;
+        left: 225px;
+        top: 16px;
     }
 
-
-
-    /* Label */
-    label {
-        color: #edfff7;
-        font-style: italic;
-        font-size: 18px;
-        opacity: 0.5;
-        position: absolute;
-        top: 15px;
-        left: 10px;
-        transition: 0.2s ease all;
-        pointer-events: none;
-        -moz-transition: 0.2s ease all;
-        -webkit-transition: 0.2s ease all;
-    }
-
-    /* Label Active State */
-    input:focus~label {
-        top: -17px;
-        left: 0px;
-        font-style: normal;
-        opacity: 1.0;
-        font-size: 14px;
-        color: #ffff;
-    }
-
-    /* Bottom Bar */
-    .search-bar {
-        position: relative;
-        display: block;
-        width: 100%;
-    }
-
-    .search-bar:before,
-    .search-bar:after {
-        content: '';
-        height: 2px;
-        width: 0;
-        position: absolute;
-        background: #01d277;
-        transition: 0.2s ease all;
-        -moz-transition: 0.2s ease all;
-        -webkit-transition: 0.2s ease all;
-    }
-
-    .search-bar:before {
-        left: 50%;
-    }
-
-    .search-bar:after {
-        right: 50%;
-    }
-
-    /* Bottom Bar Active State */
-    input:focus~.search-bar:before,
-    input:focus~.search-bar:after {
-        width: 50%;
-    }
-
-    /* Button */
-
-    .search-button {
-        position: absolute;
-        border: 2px solid #01d277;
-        border-radius: 10px;
-        font-size: 18px;
-        padding: 0 5% 0 5%;
-        left: 380px;
-        top: 18px;
-        background-color: transparent;
-        color: #01d277;
-        transition: 0.2s ease all;
-        -moz-transition: 0.2s ease all;
-        -webkit-transition: 0.2s ease all;
-    }
-
-    .search-button:focus {
-        outline: none;
-        color: #fff;
-        border: 2px solid #ffff;
-    }
-
-    .search-button:after {
-        content: '\279e';
-    }
-
-    .search-button:hover {
-        background-color: #01d277;
-        color: #081c24;
-    }
-
-    .search-button:active {
-        background-color: #ffff;
-        color: #081c24;
-    }
-
-    /* Media Queries */
-    @media only screen and (max-width: 650px) {
-
-        .search-form {
-            margin-right: 15%;
-        }
-
-        input {
-            font-size: 18px;
-            width: 200px;
-
-        }
-
-        .search-button {
-            padding: 0 15px 0 15px;
-            left: 225px;
-            top: 16px;
-        }
-
-
-
-    }
-
-    /* iPhone 4, 5, SE Landscape */
-    @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
-        input {
-            width: 250px;
-
-        }
-
-        .search-button {
-
-            left: 275px;
-
-        }
-
-    }
+}
 </style>

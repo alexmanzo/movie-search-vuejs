@@ -1,30 +1,15 @@
 <template>
-    <div class="similar-movies">
-        <h2>Similar Movies</h2>
-        <slick ref="slick" :options="slickOptions" class="slider-list">
-            <div v-for="movie in similarMoviesData" :key="movie.id" class="similar-movie-container">
-                <router-link :to="{ name: 'movie', params: { id:  movie.id }}">
-                    <img v-if="movie.poster_path === null" class="similar-movie-nophoto" :src="noPhoto" alt='no poster found' />
-                    <img v-else class="similar-movie-photo" :src="`https://image.tmdb.org/t/p/w1280/${movie.poster_path}`" :alt="`${movie.original_title}`" />
-                    <p class="similar-movie-title">{{ movie.original_title }} ({{ movie.release_date.substring(0,4) }})</p>
-                </router-link>
-            </div>
-        </slick>
+    <div class="profile-container">
+
     </div>
 </template>
 
 <script>
 import noPhoto from '@/assets/nophoto.svg'
-import Slick from 'vue-slick'
+//import Slick from 'vue-slick'
 
 export default {   
-    props: {
-        similarMoviesData: {
-            type: Array,
-            required: true
-        }
-    },
-    components: { Slick },
+    //components: { Slick },
     data () {
         return {
             noPhoto,

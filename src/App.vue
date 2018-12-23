@@ -26,19 +26,19 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import 'main.scss';
+
 body {
     margin: 0 !important;
 }
 
 #app {
-    color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
+    color: $white;
+    font-family: $font;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #081c24;
+    background-color: $blue;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
