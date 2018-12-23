@@ -1,6 +1,8 @@
 <template>
     <div id="results">
-        <p class="results-num"> Your search returned {{ numOfResults }} results</p>
+        <p v-if="this.errorMessage != ''" class="results-err">{{ errorMessage }}</p>
+        <p v-else-if="this.numOfResults === 0" class="results-num">Your search returned {{ numOfResults }} results. Check your spelling and try searching again.</p>
+        <p v-else class="results-num">Your search returned {{ numOfResults }} results.</p>
             <div v-for="movie in movies" :key="movie.id" class="movies">
                <router-link :to="{ name: 'movie', params: { id:  movie.id  }}">
                     <div class="movies--movie-card">
@@ -28,13 +30,18 @@ export default {
             movies: [],
             numOfResults: null,
             noPhoto,
+            errorMessage: ''
         }
     },
     methods: {
         async getSearchResults(query) {
+            if (query === "no query") {
+                this.errorMessage = 'Please enter a valid search term.'
+            } else {
                 let movies = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en&query=${query}`)
                 this.movies = movies.data.results
                 this.numOfResults = movies.data.total_results
+            }
         },
         async getGenreResults(id) {
             let movies = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=vote_average.desc&include_adult=false&include_video=false&language=en-US&page=1&vote_count.gte=5000&with_genres=${id}`)
@@ -68,7 +75,6 @@ export default {
     padding-top: 25px;
     display: flex;
     flex-direction: column;
-    
     align-items: center;
 }
 .movies {
@@ -114,14 +120,9 @@ export default {
 
 }
 
-.results-num {
-    @include setFontSize(14px);
+.results-num, .results-err {
+    @include setFontSize(16px);
     padding-bottom: 15px;
-}
-
-.results-err {
-     @include setFontSize(14px);
-    text-align: center;
 }
 
 a {

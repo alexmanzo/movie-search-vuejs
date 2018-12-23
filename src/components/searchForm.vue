@@ -19,7 +19,11 @@ export default {
     },
     methods: {
         submitSearch() {
-            router.push({ name: 'results', params: { query:  this.searchTerm }})
+            if (this.searchTerm === '') {
+                router.push({ name: 'results', params: { query:  "no query" }})
+            } else {
+                router.push({ name: 'results', params: { query:  this.searchTerm }})
+            }
             this.searchTerm = ''
         }
     }

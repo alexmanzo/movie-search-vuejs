@@ -54,14 +54,14 @@ export default {
                 this.castData = castData.data.cast
                 this.videoData = videoData.data.results
                 this.similarMoviesData = similarMoviesData.data.results
-                this.$root.$emit('changeBackground', `url('https://image.tmdb.org/t/p/original/${movieData.data.backdrop_path}')`)
+                this.$root.$emit('changeBackground', `url('https://image.tmdb.org/t/p/original/${movieData.data.backdrop_path}')`, 'linear-gradient(rgba(0, 0, 0, 0.9) 35%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 1) 100%)')
         }
     },
     created() {
         this.getMovieData()
     },
     beforeDestroy() {
-        this.$root.$emit('changeBackground', '')
+        this.$root.$emit('changeBackground', '', '')
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div id="app" :style="{backgroundImage: `${ backdrop }`}">
-      <div id="outer-container">
+      <div id="outer-container" :style="{ backgroundImage: `${ movieBackdrop }`}">
           <router-view :key="$route.fullPath"></router-view>
       </div>  
   </div>
@@ -12,15 +12,17 @@
 export default {
     data () {
         return {
-            backdrop: ''
+            backdrop: '',
+            movieBackdrop: ''
         }
     },
     methods: {
 
     },
     beforeUpdate(){
-        this.$root.$on('changeBackground', path => {
-            this.backdrop = path
+        this.$root.$on('changeBackground', (path1, path2) => {
+            this.backdrop = path1
+            this.movieBackdrop = path2
         })
     }
 }
@@ -31,6 +33,7 @@ export default {
 
 body {
     margin: 0 !important;
+    background-color: $blue;
 }
 
 #app {
@@ -47,8 +50,8 @@ body {
 }
 
 #outer-container {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.9) 35%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 1) 100%);
     margin: 0;
+    
 }
 
 </style>
