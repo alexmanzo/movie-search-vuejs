@@ -1,15 +1,17 @@
 <template>
     <div class="videos">
         <h2>Videos</h2>
-        <carousel :items="items"></carousel>
+        <video-carousel :items="items"></video-carousel>
     </div>
 </template>
 
 <script>
-import carousel from '@/components/carousel.vue'
+import videoCarousel from '@/components/videoCarousel.vue'
 
 export default {
-    components: { carousel },
+    components: { 
+        'video-carousel': videoCarousel
+     },
     props: {
         videoData: {
             type: Array,

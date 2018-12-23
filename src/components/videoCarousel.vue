@@ -7,35 +7,14 @@
         :style="{ transform: 'translateX' + '(' + currentOffset + 'px' + ')'}"
       >
         <div ref="card" class="carousel--card" v-for="(item, index) in items" :key="index">
-            <router-link :to="{ name: routerName, params: { id:  item.id, name: item.name  }}">
-              <img
-                v-if="item.profile_path === null || item.poster_path === null"
-                id="no-photo"
-                :src="noPhoto"
-                alt="no profile found"
-              >
-              <img
-                v-else-if="!item.profile_path"
-                :src="`https://image.tmdb.org/t/p/w1280/${item.poster_path}`"
-                :alt="`${item.original_title}`"
-              >
-              <img
-                v-else
-                :src="`https://image.tmdb.org/t/p/w1280/${item.profile_path}`"
-                :alt="`${item.name}`"
-              >
-              <div v-if="!item.name" class="carousel--card--footer">
-                <p>
-                  <strong>{{ item.original_title }} ({{ item.release_date.substring(0,4) }})</strong>
-                </p>
-              </div>
-              <div v-else class="carousel--card--footer">
-                <p>
-                  <strong>{{ item.name }}</strong>
-                </p>
-                <p>{{ item.character }}</p>
-              </div>
-            </router-link>
+          <iframe
+            :title="`${item.name}`"
+            id="ytplayer"
+            type="text/html"
+            :src="`https://www.youtube.com/embed/${item.key}`"
+            frameborder="0"
+          ></iframe>
+          <p>{{ item.name }}</p>
         </div>
       </div>
     </div>
@@ -57,11 +36,10 @@ export default {
   },
   data() {
     return {
-      noPhoto,
       currentOffset: 0,
-      paginationFactor: 200,
+      paginationFactor: 500,
       carouselWidth: 1000,
-      numOfCards: 5,
+      numOfCards: 1,
     }
   },
   computed: {
@@ -85,25 +63,16 @@ export default {
       }
     },
     setPagination() {
-      this.paginationFactor = this.$refs.card[0].clientWidth + 20
+      this.paginationFactor = this.$refs.card[0].clientWidth + 40
     },
     setWidth() {
-      if (window.outerWidth < 640) {
-        this.numOfCards = 1
-      } else if (window.innerWidth < 768) {
-        this.numOfCards = 3
-      } else if (window.innerWidth > 1440) {
-        this.numOfCards = 6 
-      } else {
-        this.numOfCards = 5
-      }
       const newWidth = this.$refs.card[0].clientWidth * this.numOfCards
       this.carouselWidth = newWidth + 20 * this.numOfCards
     },
   },
-  updated() {
+  mounted() {
     this.setWidth()
-  }
+  },
 }
 </script>
 
@@ -119,8 +88,9 @@ export default {
 .carousel {
   justify-content: center;
   box-sizing: border-box;
-  height: 40vh;
+  height: 60vh;
   overflow: hidden;
+  margin-bottom: 50px;
 
   &--overflow-container {
     overflow: hidden;
@@ -153,7 +123,6 @@ export default {
       transform: rotate(45deg) scale(0.9);
     }
   }
-
 }
 
 .carousel-items {
@@ -171,24 +140,11 @@ export default {
 
   .carousel--card {
     cursor: pointer;
-    margin: 0 10px;
+    margin: 0 20px;
 
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    img {
-      height: 30vh;
-      border-radius: 4px;
-      vertical-align: bottom;
-
-      &:hover {
-        filter: brightness(110%);
-      }
+    iframe {
+      height: 60vh;
+      width: 107vh;
     }
 
     &--footer {
