@@ -85,12 +85,6 @@ export default {
     margin-bottom: 25px;
 }
 
-#cast {
-    height: 45vh;
-    margin-bottom: 25px;
-    width: 100%;
-}
-
 @media only screen and (max-width: $medium) {
     #movie {
         flex-direction: column;

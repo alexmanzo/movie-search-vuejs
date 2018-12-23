@@ -1,13 +1,17 @@
 <template>
   <div id="movie">
     <img v-if="movieData.poster_path === null" id="no-poster" :src="noPhoto" alt="no poster found">
-    <img v-else :src="`https://image.tmdb.org/t/p/w1280/${movieData.poster_path}`" :alt="`${movieData.original_title}`">
-    <div id="movie-info">
-      <div id="movie-headline">
+    <img
+      v-else
+      :src="`https://image.tmdb.org/t/p/w1280/${movieData.poster_path}`"
+      :alt="`${movieData.original_title}`"
+    >
+    <div class="movie-info">
+      <div class="movie-info--headline">
         <h1>{{ movieData.original_title }} ({{ movieData.release_date.substring(0,4) }})</h1>
         <h4>{{ movieData.tagline }}</h4>
       </div>
-      <div id="movie-details">
+      <div class="movie-info--details">
         <p>
           <strong>Budget</strong>
           <br>
@@ -31,13 +35,15 @@
             <strong>Genres</strong>
             <br>
             <span v-for="(genre, index) in movieData.genres" :key="genre.name">
-              <router-link :to="{ name: 'genre', params: { id:  genre.id, name: genre.name  }}">{{ genre.name }}</router-link>
-              <span v-if="index < movieData.genres.length - 1"> / </span>
+              <router-link
+                :to="{ name: 'genre', params: { id:  genre.id, name: genre.name  }}"
+              >{{ genre.name }}</router-link>
+              <span v-if="index < movieData.genres.length - 1">/</span>
             </span>
           </p>
         </div>
       </div>
-      <div id="movie-plot">
+      <div class="movie-info--plot">
         <p>
           <strong>Plot</strong>
           <br>
@@ -49,26 +55,26 @@
 </template>
 
 <script>
-import noPhoto from "@/assets/nophoto.svg";
+import noPhoto from '@/assets/nophoto.svg'
 export default {
   props: {
     movieData: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      noPhoto
-    };
+      noPhoto,
+    }
   },
   methods: {},
-  created() {}
-};
+  created() {},
+}
 </script>
 
 <style lang="scss" scoped>
-@import "main.scss";
+@import 'main.scss';
 
 img {
   height: 100%;
@@ -77,53 +83,56 @@ img {
   border: 1px solid $white;
 }
 
-#movie-info {
-    display: flex;
-    flex-wrap: wrap;
-}
+.movie-info {
+  display: flex;
+  flex-wrap: wrap;
 
-#movie-headline {
+  &--headline {
     flex-basis: 100%;
     margin-bottom: -5vh;
-}
+  }
 
-#movie-details {
+  &--details {
     flex-basis: 30%;
-}
+  }
 
-#movie-plot {
+  &--plot {
     flex-basis: 70%;
+  }
 }
 
 a {
-    color: $green;
+  color: $green;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:active {
-    color: $white;
+  color: $white;
 }
 
 a:visited {
-    color: $lightgray;
+  color: $lightgray;
 }
 
 @media only screen and (max-width: $medium) {
-    #movie-plot,
-    #movie-headline,
-    #movie-details {
-        margin: 0 auto;
-        flex-basis: 100%;
-    }
 
-    img {
+  img {
       width: 100%;
       height: auto;
       margin-right: 0;
     }
+
+  .movie-info {
+    &--headline,
+    &--details,
+    &--plot {
+      margin: 0 auto;
+      flex-basis: 100%;
+    }
+  }
 }
 </style>
 
