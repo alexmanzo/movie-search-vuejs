@@ -3,6 +3,7 @@ node_modules
 #git add dist && git commit -m "Initial dist subtree commit"/dist
 
 # local env files
+.env
 .env.local
 .env.*.local
 

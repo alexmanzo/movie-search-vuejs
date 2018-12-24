@@ -1,4 +1,4 @@
-<h1>Movie Search App React</h1>
+<h1>Movie Search App Vue</h1>
 
 <h2>Summary</h2>
 <p>This movie search project was created in Vue.js, and is a refactored version of previous Movie Search projects created using jQuery and react.</p>
