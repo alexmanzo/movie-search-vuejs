@@ -28,6 +28,7 @@
 
 <style lang="scss" scoped>
 @import 'main.scss';
+    
     .app-header {
         display: flex;
         flex-direction: row;    
@@ -50,6 +51,12 @@
         position: absolute;
         margin-top: 75px;
         margin-bottom: 75px;
+    }
+
+    @supports (-moz-appearance:none) {
+        hr {
+            margin-top: 225px;
+        }
     }
 
     /* Media Queries */

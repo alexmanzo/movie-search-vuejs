@@ -149,17 +149,21 @@ button:active {
 /* Media Queries */
 @media only screen and (max-width: $small) {
 
-    .search-form {
+    #search-form {
         margin-right: 15%;
     }
 
+    .search-bar {
+        display: none;
+    }
+
     input {
-        width: 200px;
+        width: 250px;
     }
 
     button {
         padding: 0 15px 0 15px;
-        left: 225px;
+        left: 275px;
         top: 16px;
     }
 

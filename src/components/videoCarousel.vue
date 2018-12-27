@@ -88,7 +88,7 @@ export default {
 .carousel {
   justify-content: center;
   box-sizing: border-box;
-  height: 60vh;
+  width: 75vw;
   overflow: hidden;
   margin-bottom: 50px;
 
@@ -143,8 +143,8 @@ export default {
     margin: 0 20px;
 
     iframe {
-      height: 60vh;
-      width: 107vh;
+      width: 70vw;
+      height: 40vw;
     }
 
     &--footer {
