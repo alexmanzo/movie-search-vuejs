@@ -2,7 +2,8 @@
   <div id="app" :style="{backgroundImage: `${ backdrop }`}">
       <div id="outer-container" :style="{ backgroundImage: `${ movieBackdrop }`}">
           <router-view :key="$route.fullPath"></router-view>
-      </div>  
+          <app-footer></app-footer>
+      </div> 
   </div>
 </template>
 
