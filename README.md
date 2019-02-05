@@ -21,7 +21,6 @@
 <li>Sass</li>
 <li>Axios</li>
 <li>Moment.js</li>
-<li>Vue.js</li>
 </ul>
 <h2>Author</h2>
 <p>This project was created by Alex Manzo.</p>
