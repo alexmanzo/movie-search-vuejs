@@ -55,13 +55,6 @@ export default {
             this.getGenreResults(this.$route.params.id)
         }     
     },
-    beforeUpdate() {
-        if (this.$route.name === "results") {
-            this.getSearchResults(this.$route.params.query)
-        } else if (this.$route.name === "genre") {
-            this.getGenreResults(this.$route.params.id)
-        }
-    }
 }
 </script>
 

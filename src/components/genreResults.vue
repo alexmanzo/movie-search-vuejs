@@ -41,9 +41,6 @@ export default {
     },
     created() {
         this.getSearchResults(this.$route.params.query)
-    },
-    beforeUpdate() {
-        this.getSearchResults(this.$route.params.query)
     }
 }
 </script>
