@@ -1,7 +1,8 @@
 <h1>Movie Search App Vue</h1>
 
 <h2>Summary</h2>
-<p>This movie search project was created in Vue.js, and is a refactored version of previous Movie Search projects created using jQuery and react.</p>
+<p>Refactored project to learn Vue.js. Users can search for movies, find out basic details, then disocver more movies through exploring the cast, similar movies, and more.</p>
+<p>One significant difference from the React version is the creation of a custom slider component.</p>
 
 <h2>Screenshots</h2>
 <h3>Homepage</h3>
@@ -20,7 +21,6 @@
 <li>Sass</li>
 <li>Axios</li>
 <li>Moment.js</li>
-<li>Vue.js</li>
 </ul>
 <h2>Author</h2>
 <p>This project was created by Alex Manzo.</p>
